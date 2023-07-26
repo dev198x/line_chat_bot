@@ -1,5 +1,5 @@
 
-@channelToken = 
+@channelToken = FZ9q78ZqxOCLwPv0/BOtFQU8z/MGTPVwXyenesRaP0cnNqU/7/4zgYjN+4dh7DNW8tPCQ5xhl0OYrsKRbvSKNisFYaQiMZilaKNhtywOB7CBbo/lj8/Ak2ceYOLFJ6ZEmvKly8bT3cTtNkPQnY6oRAdB04t89/1O/w1cDnyilFU=
 ### Get bot information
 GET https://api.line.me/v2/bot/info
 Content-Type: application/json

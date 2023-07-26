@@ -2,15 +2,15 @@
 @userToken = eyJraWQiOiI1Y2VlMzdlNjljMzUzNzY2YTNmZTAxZmEwNWJmODIxMjgzNTQxYTg0YTY2OTJjZGVkZGY5NDdkMGMwOTA0MzY3IiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2FjY2Vzcy5saW5lLm1lIiwic3ViIjoiVTEzMDQxN2NjM2NhZmY3NjQzZmRiNGI5ZWYxYmMyZTNlIiwiYXVkIjoiMjAwMDA2OTUyOCIsImV4cCI6MTY5MDM1OTIzNiwiaWF0IjoxNjkwMzU1NjM2LCJhbXIiOlsibGluZXNzbyJdLCJuYW1lIjoiS2jDoW5oIFbFqSBycnIiLCJwaWN0dXJlIjoiaHR0cHM6Ly9wcm9maWxlLmxpbmUtc2Nkbi5uZXQvMGhNUjRhV2xVdUVuMEpHQURhdVp0dEtqVmRIQkItTmhRMWNYWllTQ3NRVHg1M2ZBQl9aWHRmRXk5S1RVZ2plbFl2TkhoZUV5OGNUVWtzIn0.OtwckQ4d7_ui66xPSIIZCz-I3pdKYBcWl_Qjy2UTJwi1h_iyFi8NZjyCD3BYrU1cHIzrgfafh1CCslEjFDHirQ
 @clientId =2000069528
 @userAccessToken = eyJhbGciOiJIUzI1NiJ9.RsSPYGCgkz6O5VSCSxzFcCxm3bIYJHOsYLHfx3aqgQtK0kkCo5j5uY7Sx_ZwdUVuzBRfN8i1bIprojsel71LTJej6UF2Qdfc-ybquPE6uv739JLGgXQDcfQX_WATpzvcS2KBgPu36g3UM5G9p20IXdtRcNxRpQln2JbYnZZ0V9g.JLugeKZ7IFI4BBnheA0UHthNhYgKT61TIt6mjN3Aroc
-@userId = U130417cc3caff7643fdb4b9ef1bc2e3e
-@channelToken = 
+@userId = U33fe91cfb74d27ce2e7c72102a8ffae5
+@channelToken = FZ9q78ZqxOCLwPv0/BOtFQU8z/MGTPVwXyenesRaP0cnNqU/7/4zgYjN+4dh7DNW8tPCQ5xhl0OYrsKRbvSKNisFYaQiMZilaKNhtywOB7CBbo/lj8/Ak2ceYOLFJ6ZEmvKly8bT3cTtNkPQnY6oRAdB04t89/1O/w1cDnyilFU=
 ### Verify webhook setup
 POST https://api.line.me/v2/bot/channel/webhook/test
 Content-Type: application/json
 Authorization: Bearer {{channelToken}}
 
 ### Sending reply message
-@replyTokenx = bf52979a7f634800aca1dc3299a341aa
+@replyTokenx = 014a77a9049d4939b6f12bbd24020be2
 POST https://api.line.me/v2/bot/message/reply
 Content-Type: application/json
 Authorization: Bearer {{channelToken}}
@@ -32,7 +32,7 @@ Authorization: Bearer {{channelToken}}
 ### Sending push message
 
 #random 16
-@randomKey = 123e4567-e89b-12d3-a456-426614174000
+@randomKey = a8371f5c-2b98-11ee-be56-0242ac120002
 POST https://api.line.me/v2/bot/message/push
 Content-Type: application/json
 Authorization: Bearer {{channelToken}}
@@ -51,3 +51,22 @@ X-Line-Retry-Key: {{randomKey}}
         }
     ]
 }
+
+#####
+curl -v -X POST https://api.line.me/v2/bot/message/multicast \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer {{channelToken}}' \
+-H 'X-Line-Retry-Key: {{$guid}}' \
+-d '{
+    "to": ["U33fe91cfb74d27ce2e7c72102a8ffae5","U130417cc3caff7643fdb4b9ef1bc2e3e"],
+    "messages":[
+        {
+            "type":"text",
+            "text":"Hello, world1"
+        },
+        {
+            "type":"text",
+            "text":"Hello, world2"
+        }
+    ]
+}'
