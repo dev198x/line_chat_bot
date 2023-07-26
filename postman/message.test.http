@@ -1,0 +1,7 @@
+
+@channelToken = 
+### Get bot information
+GET https://api.line.me/v2/bot/info
+Content-Type: application/json
+Authorization: Bearer {{channelToken}}
+
