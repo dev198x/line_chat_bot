@@ -63,3 +63,31 @@ id, name, message, avatar.
 **method2**: using a [idToken](https://developers.line.biz/en/docs/line-login/verify-id-token/#get-an-id-token)
 clientId: is the [login channel id](https://developers.line.biz/console/channel/2000069528/basics)
 
+
+##### work flow
+1. new LINE channel login to connect web LINEFF app
+2. new LINE channel message to setting webhook to receive user messages and reply it
+3. LINEFF app after login, and then it can call some functions
+```javascript
+// Using api
+const os = liff.getOS();
+console.log(os);
+
+// Must login first
+if (!liff.isLoggedIn()) {
+  liff.login();
+} else {
+  // after login success
+  // get liff id token
+    const token = liff.getIDToken();
+    console.log(token);
+
+    // get accessToken
+    const accessToken = liff.getAccessToken();
+    console.log({accessToken});
+
+    // // get user profile
+    const userProfile = await liff.getProfile();
+}
+```
+4. your server should receive an accessToken and then call rest API verify and check expired

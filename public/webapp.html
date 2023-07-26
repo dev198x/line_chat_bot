@@ -11,45 +11,52 @@
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script>
       function initializeLiff(myLiffId) {
-        console.log('initial'+ myLiffId)
+        console.log('initial' + myLiffId)
         liff
           .init({
             liffId: myLiffId,
           })
           .then(async () => {
-            setButtonHandler();
+            setButtonHandler()
             // Using api
-            const os = liff.getOS();
-            console.log(os);
+            const os = liff.getOS()
+            console.log('os', os)
 
-             // // Must login first
+            // // Must login first
             if (!liff.isLoggedIn()) {
-              liff.login();
+              console.log('login')
+              liff.login()
+            } else {
+              // get liff id token
+              console.log('isLoggedIn==true')
+              const token = liff.getIDToken()
+              console.log(token)
+
+              // get accessToken
+              const accessToken = liff.getAccessToken()
+              console.log({ accessToken })
+
+              // // get user profile
+              const userProfile = await liff.getProfile()
+              console.log(userProfile, 'user')
             }
 
-            // get liff id token
-            const token = liff.getIDToken();
-            console.log(token);
-            
-            // get accessToken
-            const accessToken = liff.getAccessToken();
-            console.log({accessToken});
-
-            // // get user profile
-            const userProfile = await liff.getProfile();
-            console.log(userProfile, 'user');
- 
-
+            // ---------------------
+            // logout call only when external browse or LINE's in-app browser is used
+            // if (liff.isLoggedIn()) {
+            //   liff.logout()
+            //   window.location.reload()
+            // }
           })
           .catch((err) => {
-            alert(`error: ${JSON.stringify(err)}`);
-          });
-      }
-  
+            alert(`error: ${JSON.stringify(err)}`)
+          })
+      } // end init
+
       function setButtonHandler() {
-        let button = document.getElementById('button');
+        let button = document.getElementById('button')
         button.addEventListener('click', () => {
-          window.alert('clicked: sendMessages');
+          window.alert('clicked: sendMessages')
           liff
             .sendMessages([
               {
@@ -58,38 +65,39 @@
               },
             ])
             .then(() => {
-              alert('message sent');
-              liff.closeWindow();
+              alert('message sent')
+              liff.closeWindow()
             })
             .catch((err) => {
-              window.alert('Error sending message: ' + err);
-            });
-        });
+              window.alert('Error sending message: ' + err)
+            })
+        })
       }
 
       function getUserProfile(idToken) {
         if (idToken) {
-          fetch("https://api.line.me/v2.1/verify", {
+          fetch('https://api.line.me/v2.1/verify', {
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${idToken}`,
-              "method":"POST"
-            }, 
-          }).then((reqResponse) => reqResponse.json())
-          .then((jsonResponse) => {
-            console.log(jsonResponse)
+              method: 'POST',
+            },
           })
-          .catch((err) => {
-            alert(`error: ${JSON.stringify(err)}`)
-          })
+            .then((reqResponse) => reqResponse.json())
+            .then((jsonResponse) => {
+              console.log(jsonResponse)
+            })
+            .catch((err) => {
+              alert(`error: ${JSON.stringify(err)}`)
+            })
         }
       }
-  
-      document.addEventListener('DOMContentLoaded', () => {
-        const myLiffId = '2000069528-0lK8Ag1w';
 
-        initializeLiff(myLiffId);
-      });
+      document.addEventListener('DOMContentLoaded', () => {
+        const myLiffId = '2000069528-0lK8Ag1w'
+
+        initializeLiff(myLiffId)
+      })
     </script>
   </body>
 </html>
