@@ -23,6 +23,8 @@ app.get('/', (_req, res) => {
 app.post('/webhooks/line', (req, res) => {
     console.log(req.query, req.params);
     console.log('req.body', JSON.stringify(req.body))
+    // console.log('req.headers', req.headers)
+    console.log('req.body', req.body)
     console.log('comming into our server');
     res.send('ok babe');
 })

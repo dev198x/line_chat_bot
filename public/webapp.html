@@ -30,15 +30,15 @@
               // get liff id token
               console.log('isLoggedIn==true')
               const token = liff.getIDToken()
-              console.log(token)
+              console.log('token', token)
 
               // get accessToken
               const accessToken = liff.getAccessToken()
-              console.log({ accessToken })
+              console.log('accessToken', accessToken)
 
               // // get user profile
               const userProfile = await liff.getProfile()
-              console.log(userProfile, 'user')
+              console.log('userProfile', userProfile)
             }
 
             // ---------------------
@@ -94,7 +94,7 @@
       }
 
       document.addEventListener('DOMContentLoaded', () => {
-        const myLiffId = '2000069528-KXDlxWZ7'
+        const myLiffId = '2000793032-9oMXw7Bl'
 
         initializeLiff(myLiffId)
       })
