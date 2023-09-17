@@ -75,3 +75,31 @@ curl -v -X POST https://api.line.me/v2/bot/message/multicast \
     ]
 }'
 
+######
+#random 16
+@randomKey = a8371f5c-2b98-11ee-be56-0242ac120006
+POST https://api.line.me/v2/bot/message/push
+Content-Type: application/json
+Authorization: Bearer {{channelToken}}
+X-Line-Retry-Key: {{randomKey}}
+
+{
+    "to": "{{userId}}",
+    "messages":[
+        {
+		"type" : "template",
+		"altText" : "クレジットカード認証エラー",
+		"template" : {
+			"type" : "buttons",
+			"text" : "変更が完了したら以下の「変更完了」ボタンを押してください。",
+			"actions" : [
+				{
+					"type" : "postback",
+					"data" : "{\"data\":\"64febd9d18e43db82cbbc1fe\",\"type\":\"card_add_error\"}",
+					"label" : "「変更完了」"
+				}
+			]
+		}
+	}
+    ]
+}
